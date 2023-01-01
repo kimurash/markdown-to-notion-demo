@@ -2,5 +2,11 @@
   "name": "markdown-to-notion-demo",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@notionhq/client": "^2.2.3",
+    "@tryfabric/martian": "^1.2.4",
+    "gray-matter": "^4.0.3"
+  }
 }

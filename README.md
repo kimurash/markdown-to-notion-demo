@@ -1,3 +1,3 @@
 # Markdown To Notion Demo
 
-https://zenn.dev/cizneeh/markdown-to-notion-db
+https://zenn.dev/cizneeh/articles/markdown-to-notion-db

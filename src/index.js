@@ -2,12 +2,13 @@ import { Client } from '@notionhq/client'
 import { getAllNotes } from './markdown.js'
 
 const token = process.env.NOTION_TOKEN
-const databaseId = process.env.NOTION_DATABASE_ID
+const DBID = process.env.NOTION_DB_DEV
 
 async function main() {
   const notion = new Client({ auth: token })
+  // const DB = await notion.databases.retrieve({ database_id: DBID })
 
-  const notes = getAllNotes('notes')
+  const notes = getAllNotes('../notes')
   const failedNotes = []
 
   for (const note of notes) {
@@ -15,7 +16,7 @@ async function main() {
       await notion.pages.create({
         parent: { database_id: databaseId },
         properties: {
-          // プロパティ名はcase sensitiveなので注意
+          // プロパティ名はcase sensitive
           Name: {
             type: 'title',
             title: [{ text: { content: note.name } }],
@@ -28,12 +29,12 @@ async function main() {
         children: note.body,
       })
     } catch (e) {
-      console.error(`${note.name}の追加に失敗: `, e)
+      console.error(`${note.name}の追加に失敗:`, e)
       failedNotes.push(note.name)
     }
   }
 
-  console.log('ページ作成に失敗したノート: ', failedNotes)
+  console.log('ページ作成に失敗したノート:', failedNotes)
 }
 
 main()
